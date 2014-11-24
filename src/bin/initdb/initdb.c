@@ -287,6 +287,7 @@ do { \
 
 #define PG_CMD_PUTS(line) \
 do { \
+	printf("%s\n",line);\
 	if (fputs(line, cmdfd) < 0 || fflush(cmdfd) < 0) \
 		output_failed = true, output_errno = errno; \
 } while (0)
@@ -1057,9 +1058,9 @@ set_null_conf(void)
 {
 	FILE	   *conf_file;
 	char	   *path;
-
 	path = pg_malloc(strlen(pg_data) + 17);
 	sprintf(path, "%s/postgresql.conf", pg_data);
+	printf("create the file :%s\n",path);
 	conf_file = fopen(path, PG_BINARY_W);
 	if (conf_file == NULL)
 	{
@@ -1127,6 +1128,7 @@ test_config_settings(void)
 				 backend_exec, boot_options,
 				 test_conns, test_buffs,
 				 DEVNULL, DEVNULL);
+		printf("test cmd is %s",cmd);
 		status = system(cmd);
 		if (status == 0)
 		{
@@ -1161,6 +1163,7 @@ test_config_settings(void)
 				 backend_exec, boot_options,
 				 n_connections, test_buffs,
 				 DEVNULL, DEVNULL);
+		printf("test cmd is %s",cmd);
 		status = system(cmd);
 		if (status == 0)
 			break;
@@ -1450,6 +1453,7 @@ bootstrap_template1(void)
 			 data_checksums ? "-k" : "",
 			 boot_options, talkargs);
 
+	printf("test cmd in bootstrap_template1 is %s",cmd);
 	PG_CMD_OPEN;
 
 	for (line = bki_lines; *line != NULL; line++)
@@ -3155,7 +3159,7 @@ void
 create_data_directory(void)
 {
 	int			ret;
-
+	printf("the pg_data_directory:%s\n",pg_data);
 	switch ((ret = pg_check_dir(pg_data)))
 	{
 		case 0:
@@ -3226,6 +3230,7 @@ create_xlog_symlink(void)
 		int			ret;
 
 		/* clean up xlog directory name, check it's absolute */
+		printf("the xlog_dir is %s\n",xlog_dir);
 		canonicalize_path(xlog_dir);
 		if (!is_absolute_path(xlog_dir))
 		{

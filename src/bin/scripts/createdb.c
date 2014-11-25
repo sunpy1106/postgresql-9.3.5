@@ -50,7 +50,7 @@ main(int argc, char *argv[])
 	char	   *port = NULL;
 	char	   *username = NULL;
 	enum trivalue prompt_password = TRI_DEFAULT;
-	bool		echo = false;
+	bool		echo = true;               //change it to true ,out put the sql info by default 
 	char	   *owner = NULL;
 	char	   *tablespace = NULL;
 	char	   *template = NULL;

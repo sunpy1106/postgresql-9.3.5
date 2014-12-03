@@ -1,0 +1,203 @@
+archive_command	sighup	Write-Ahead 日志 / 归档	STRING				设置用于对WAL文件进行归档的shell命令	
+archive_mode	postmaster	Write-Ahead 日志 / 归档	BOOLEAN	FALSE			允许使用archive_command参数对WAL文件进行归档.	
+archive_timeout	sighup	Write-Ahead 日志 / 归档	INTEGER	0	0	1073741823	如果新的文件没有在N秒内启动,那么强制切换到下一个xlog文件.	
+array_nulls	user	版本和平台兼容性 / 上一个 PostgreSQL 版本	BOOLEAN	FALSE			在数组中启用空值成员输入	当打开这个选项的时候，在数组输入值中没有引用的NULL表示空值;否则是按照字面上的含义进行解释.
+authentication_timeout	sighup	联接和认证 / 安全和认证	INTEGER	0	1	600	设置完成客户端认证的需要等待的最长时间	
+autovacuum	sighup	Autovacuum	BOOLEAN	FALSE			启动autovacuum子进程.	
+autovacuum_analyze_scale_factor	sighup	Autovacuum	REAL	0	0	100	在分析前插入,更新或删除元组的数量，这个数量以表大小的百分比的形式出现	
+autovacuum_analyze_threshold	sighup	Autovacuum	INTEGER	0	0	2147483647	分析前可插入，更新或删除元组的最小数量	
+autovacuum_freeze_max_age	postmaster	Autovacuum	INTEGER	0	100000000	2000000000	这是应该自动清理一张表以避免事务ID重叠的时间段.	
+autovacuum_max_workers	postmaster	Autovacuum	INTEGER	0	1	8388607	设置最大可同时运行的autovacuum工作进程数量	
+autovacuum_multixact_freeze_max_age	postmaster	Autovacuum	INTEGER	0	10000000	2000000000	Multixact age at which to autovacuum a table to prevent multixact wraparound.	
+autovacuum_naptime	sighup	Autovacuum	INTEGER	0	1	2147483	两次运行autovacuum进程的休眠时间	
+autovacuum_vacuum_cost_delay	sighup	Autovacuum	INTEGER	0	-1	100	对于autovacuum来说,Vacuum开销延迟是以毫秒为单位	
+autovacuum_vacuum_cost_limit	sighup	Autovacuum	INTEGER	0	-1	10000	对于autovacuum进程，在暂停前前进行清理有效开销总量.	
+autovacuum_vacuum_scale_factor	sighup	Autovacuum	REAL	0	0	100	在清理前需要插入,删除或更新元组的数量，这个数量是作为表大小的百分比	
+autovacuum_vacuum_threshold	sighup	Autovacuum	INTEGER	0	0	2147483647	设置激活清理操作所需要最小数量的更新或删除元组.	
+backslash_quote	user	版本和平台兼容性 / 上一个 PostgreSQL 版本	ENUM	safe_encoding			在字符串常量中设置是否允许使用"\'"	
+bgwriter_delay	sighup	资源使用 / 后台写入进程	INTEGER	0	10	10000	后台写入进程 (Background writer) 两次运行之间的休眠时间.	
+bgwriter_lru_maxpages	sighup	资源使用 / 后台写入进程	INTEGER	0	0	1000	后台写入进程 (Background writer) 每次可刷新LRU页的最大数量	
+bgwriter_lru_multiplier	sighup	资源使用 / 后台写入进程	REAL	0	0	10	每一次释放平均缓冲区使用量的倍数大小	
+bonjour	postmaster	联接和认证 / 联接设置	BOOLEAN	FALSE			启用通过Bonjour的方式来宣布数据库服务器在网络中的存在.	
+bonjour_name	postmaster	联接和认证 / 联接设置	STRING				设置Bonjour服务名称.	
+bytea_output	user	客户端联接默认 / 语句动作	ENUM	hex			设置bytea类型数据的输出格式	
+check_function_bodies	user	客户端联接默认 / 语句动作	BOOLEAN	FALSE			在创建函数过程中检查函数体.	
+checkpoint_completion_target	sighup	Write-Ahead 日志 / Checkpoints	REAL	0	0	1	在检查点事件期间花费在将缓冲区中脏页刷新到磁盘的时间， 这个时间作为检查点间隔的百分比。	
+checkpoint_segments	sighup	Write-Ahead 日志 / Checkpoints	INTEGER	0	1	2147483647	在自动WAL检查点之间设置log段中的最大距离.	
+checkpoint_timeout	sighup	Write-Ahead 日志 / Checkpoints	INTEGER	0	30	3600	设置两次自动WAL检查点事件之间需要等待的最大时间	
+checkpoint_warning	sighup	Write-Ahead 日志 / Checkpoints	INTEGER	0	0	2147483647	如果检查点段的填充频度超过了最大值，启用警告功能。	如果检查点事件是由于填充检查点段比这个数量的秒数更加频繁所引起，那么会向服务器日志写一条消息. 如果把参数设置为0，那么可以关掉警告功能.
+client_encoding	user	客户端联接默认 / 本地化和格式化	STRING	SQL_ASCII			设置客户端编码	
+client_min_messages	user	报告和日志 / 日志时间	ENUM	notice			设置发送到客户端的信息级别.	每一层都包含在这一层后面的层次, 对于越往后的层次，就会发送越少的消息.
+commit_delay	superuser	Write-Ahead 日志 / 设置	INTEGER	0	0	100000	设置事物提交和刷新 WAL 到磁盘间的延迟时间, 单位微秒.	
+commit_siblings	user	Write-Ahead 日志 / 设置	INTEGER	0	0	1000	在执行commit_delay前，设置最少的可同步打开事务的数量.	
+constraint_exclusion	user	查询调整 / 其它规划器选项	ENUM	partition			使计划器可以使用约束来优化查询.	如果约束能够确保没有列符合查询条件，那么将跳过表扫描.
+cpu_index_tuple_cost	user	查询调整 / Planner Cost Constants	REAL	0	0	1.79769e+308	设置计划器在索引扫描期间对处理每个索引项的开销估算.	
+cpu_operator_cost	user	查询调整 / Planner Cost Constants	REAL	0	0	1.79769e+308	设置计划器对处理每个操作符和函数调用的开销估算.	
+cpu_tuple_cost	user	查询调整 / Planner Cost Constants	REAL	0	0	1.79769e+308	设置计划器对处理每个元组(也就是记录)的开销估算	
+cursor_tuple_fraction	user	查询调整 / 其它规划器选项	REAL	0	0	1	设置计划器对于通过游标取回记录部分的估算.	
+data_directory	postmaster	文件位置	STRING				设置服务器的数据目录	
+DateStyle	user	客户端联接默认 / 本地化和格式化	STRING	ISO, MDY			设置日期和时间值的显示格式.	控制对模糊日期输入的解释.
+db_user_namespace	sighup	联接和认证 / 安全和认证	BOOLEAN	FALSE			启用每个数据库的用户名	
+deadlock_timeout	superuser	锁管理	INTEGER	0	1	2147483647	在检查死锁前设置在一个锁上的等待时间.	
+debug_pretty_print	user	报告和日志 / 日志内容	BOOLEAN	FALSE			显示缩进的解析和计划树	
+debug_print_parse	user	报告和日志 / 日志内容	BOOLEAN	FALSE			对每个查询的分析树进行日志记录	
+debug_print_plan	user	报告和日志 / 日志内容	BOOLEAN	FALSE			记录每一个查询的执行计划	
+debug_print_rewritten	user	报告和日志 / 日志内容	BOOLEAN	FALSE			对每个查询的重写分析树进行日志记录	
+default_statistics_target	user	查询调整 / 其它规划器选项	INTEGER	0	1	10000	设置默认统计对象.	在没有通过ALTER TABLE SET STATISTICS产生列定义目标集合的列上使用.
+default_tablespace	user	客户端联接默认 / 语句动作	STRING				设置用于创建表和索引的缺省表空间.	使用空字符串表示数据库的缺省表空间.
+default_text_search_config	user	客户端联接默认 / 本地化和格式化	STRING	pg_catalog.simple			设置缺省文本搜索配置	
+default_transaction_deferrable	user	客户端联接默认 / 语句动作	BOOLEAN	FALSE			为新事物设置默认的可延迟状态.	
+default_transaction_isolation	user	客户端联接默认 / 语句动作	ENUM	read committed			设置每一个新事物的隔离 (isolation) 级别.	
+default_transaction_read_only	user	客户端联接默认 / 语句动作	BOOLEAN	FALSE			为新事物设置默认的只读状态.	
+default_with_oids	user	版本和平台兼容性 / 上一个 PostgreSQL 版本	BOOLEAN	FALSE			缺省下使用OIDs来创建表.	
+dynamic_library_path	superuser	客户端联接默认 / 其它默认	STRING	$libdir			设置动态加载摸组的路径.	如果一个动态加载模块需要打开并且指定名字没有路径 (例如, 名字中没包含斜杠), 系统将在此路径中查找指定的文件.
+effective_cache_size	user	查询调整 / Planner Cost Constants	INTEGER	0	1	2147483647	设置关于计划器对磁盘缓冲大小的假设.	将要用于存储PostgreSQL数据文件的内核磁盘缓冲部分，以8K大小的页为单位.
+effective_io_concurrency	user	资源使用 / 异步系统行为	INTEGER	0	0	1000	可以由磁盘子系统有效处理的并发请求数量.	对于RAID磁盘阵列来说，同步可处理的请求与磁盘阵列中磁盘数量应该相近.
+enable_bitmapscan	user	查询调整 / 规划器方法配置	BOOLEAN	FALSE			启用查询计划器的位图扫描计划.	
+enable_hashagg	user	查询调整 / 规划器方法配置	BOOLEAN	FALSE			启用查询计划器的哈希聚合计划.	
+enable_hashjoin	user	查询调整 / 规划器方法配置	BOOLEAN	FALSE			启用查询计划器的哈希连接计划.	
+enable_indexonlyscan	user	查询调整 / 规划器方法配置	BOOLEAN	FALSE			启用查询计划器的仅索引扫描计划.	
+enable_indexscan	user	查询调整 / 规划器方法配置	BOOLEAN	FALSE			启用查询计划器的索引扫描计划.	
+enable_material	user	查询调整 / 规划器方法配置	BOOLEAN	FALSE			启用查询计划器的实体化使用.	
+enable_mergejoin	user	查询调整 / 规划器方法配置	BOOLEAN	FALSE			启用查询计划器的合并连接计划.	
+enable_nestloop	user	查询调整 / 规划器方法配置	BOOLEAN	FALSE			启用查询计划器的嵌套循环连接计划.	
+enable_seqscan	user	查询调整 / 规划器方法配置	BOOLEAN	FALSE			启用查询计划器的顺序扫描计划.	
+enable_sort	user	查询调整 / 规划器方法配置	BOOLEAN	FALSE			启用查询计划器的显式排序步骤.	
+enable_tidscan	user	查询调整 / 规划器方法配置	BOOLEAN	FALSE			启用查询计划器的TID扫描计划.	
+escape_string_warning	user	版本和平台兼容性 / 上一个 PostgreSQL 版本	BOOLEAN	FALSE			在顺序字符串文字中关于反斜线转义的警告	
+event_source	postmaster	报告和日志 / 日志位置	STRING	PostgreSQL			设置在事件日志 (syslog) 中用于标识 PostgreSQL 消息的程序名.	
+exit_on_error	user	错误处理	BOOLEAN	FALSE			只要遇错即终止会话.	
+external_pid_file	postmaster	文件位置	STRING				把 postmaster PID 写到指定文件.	
+extra_float_digits	user	客户端联接默认 / 本地化和格式化	INTEGER	0	-15	3	设置浮点数显示的位数.	这将影响实数,双精度类型和几何数据类型.参数被加到位数的标准数量(视情况而定，可能是FLT_DIG或DBL_DIG)
+from_collapse_limit	user	查询调整 / 其它规划器选项	INTEGER	0	1	2147483647	所设置的FROM列表大小超过子查询所允许的最大长度	如果所产生的FROM列表成员不超过上层查询的相应的数量,那么计划器会把子查询合并到上层查询中.
+fsync	sighup	Write-Ahead 日志 / 设置	BOOLEAN	FALSE			强制和磁盘同步更新	服务器将在多个位置使用系统调用fsync()来确定更新操作已经将数据写入磁盘.这将确保在操作系统或硬件崩溃后数据库集群将恢复到一个一致性状态. 
+full_page_writes	sighup	Write-Ahead 日志 / 设置	BOOLEAN	FALSE			在检查点事件发生后发生第一次修改数据时，把所有的页写到WAL文件中	在操作系统崩溃过程中正在写入的页上的数据可能已经部分写入磁盘.在恢复期间,在WAL文件中所保存的已改变记录不足以进行恢复.当对WAL发生检查点事件后进行第一次修改操作时这个选项可以写入页。这样将允许进行完全恢复.
+geqo	user	查询调整 / 基因查询优化	BOOLEAN	FALSE			启用基因查询优化.	算法企图执行不带有无穷搜索的计划.
+geqo_effort	user	查询调整 / 基因查询优化	INTEGER	0	1	10	GEQO: 为其它GEQO参数设置缺省值	
+geqo_generations	user	查询调整 / 基因查询优化	INTEGER	0	0	2147483647	GEQO: 算法的迭代次数	没有选择出一个合适的缺省值
+geqo_pool_size	user	查询调整 / 基因查询优化	INTEGER	0	0	2147483647	GEQO: 人群 (population) 个体 (individual) 数	没有选择出一个合适的缺省值
+geqo_seed	user	查询调整 / 基因查询优化	REAL	0	0	1	GEQO:用于随机路径选择的种子.	
+geqo_selection_bias	user	查询调整 / 基因查询优化	REAL	0	1.5	2	GEQO: 在总体中的选择性压力	
+geqo_threshold	user	查询调整 / 基因查询优化	INTEGER	0	2	2147483647	设置超过GEQO使用的FROM列表成员数量门限值.	
+gin_fuzzy_search_limit	user	客户端联接默认 / 其它默认	INTEGER	0	0	2147483647	设置由GIN进行的精确搜索所允许的最大允许结果.	
+hba_file	postmaster	文件位置	STRING				设置服务器的 "hba" 配置文件	
+hot_standby	postmaster	复制 / 备用服务器	BOOLEAN	FALSE			允许在恢复期间进行连接和查询.	
+hot_standby_feedback	sighup	复制 / 备用服务器	BOOLEAN	FALSE			允许来自热备节点到主节点的响应，以避免查询冲突.	
+ident_file	postmaster	文件位置	STRING				设置服务器的 "ident" 配置文件	
+IntervalStyle	user	客户端联接默认 / 本地化和格式化	ENUM	postgres			设置时间间隔值的显示格式.	
+join_collapse_limit	user	查询调整 / 其它规划器选项	INTEGER	0	1	2147483647	设置的FROM列表大小超过没有展平的JOIN结构大小.	无论什么时候产生不超过这个数量的成员,计划器都将显式的JOIN结构展平到FROM子句后面的成员列表中.
+krb_caseins_users	sighup	联接和认证 / 安全和认证	BOOLEAN	FALSE			设置 Kerberos和GSSAPI的用户名是否应该区分大小写.	
+krb_server_keyfile	sighup	联接和认证 / 安全和认证	STRING	FILE:/etc/krb5.keytab			设置 Kerberos 服务器密钥文件位置.	
+krb_srvname	sighup	联接和认证 / 安全和认证	STRING	postgres			设置Kerberos服务的名称	
+lc_messages	superuser	客户端联接默认 / 本地化和格式化	STRING				设置信息显示语言.	
+lc_monetary	user	客户端联接默认 / 本地化和格式化	STRING	C			为货币数量格式设置 locale.	
+lc_numeric	user	客户端联接默认 / 本地化和格式化	STRING	C			为数字格式设置 locale	
+lc_time	user	客户端联接默认 / 本地化和格式化	STRING	C			为日期和时间值格式设置 locale	
+listen_addresses	postmaster	联接和认证 / 联接设置	STRING	localhost			设置监听的主机名或 IP 地址.	
+lo_compat_privileges	superuser	版本和平台兼容性 / 上一个 PostgreSQL 版本	BOOLEAN	FALSE			为在大对象上的权限检查启用向后兼容模式.	为了与9.0版本之前的PostgreSQL相兼容，在读取或修改大对象时候不进行权限检查
+local_preload_libraries	backend	客户端联接默认 / 其它默认	STRING				列出预先加载到每个后台进程的共享库.	
+lock_timeout	user	客户端联接默认 / 语句动作	INTEGER	0	0	2147483647	Sets the maximum allowed duration of any wait for a lock.	值为 0 的时候关闭超时.
+log_autovacuum_min_duration	sighup	报告和日志 / 日志内容	INTEGER	0	-1	2147483647	设置最小执行时间,如果autovacuum操作时间大于等于这个值，那么将记录这些操作.	0表示打印出所有的操作.-1表示关闭对autovacuum的日志记录功能
+log_checkpoints	sighup	报告和日志 / 日志内容	BOOLEAN	FALSE			记录每一个检查点事件	
+log_connections	backend	报告和日志 / 日志内容	BOOLEAN	FALSE			记录每一个成功的联接.	
+log_destination	sighup	报告和日志 / 日志位置	STRING	stderr			设置服务器日志输出目标.	有效值为 "stderr", "syslog", "csvlog", and "eventlog" 的组合, 这取决于平台的种类.
+log_directory	sighup	报告和日志 / 日志位置	STRING	pg_log			设置日志文件目的目录.	可以指定为data目录的相对目录或绝对目录.
+log_disconnections	backend	报告和日志 / 日志内容	BOOLEAN	FALSE			对会话的结束时间和整个会话的持续时间进行日志记录	
+log_duration	superuser	报告和日志 / 日志内容	BOOLEAN	FALSE			记录每一条完成了的 SQL 语句过程.	
+log_error_verbosity	superuser	报告和日志 / 日志内容	ENUM	default			设置日志信息的冗长.	
+log_executor_stats	superuser	统计信息 / 监控	BOOLEAN	FALSE			把执行器 (executor) 性能统计信息写入到服务器日志中.	
+log_file_mode	sighup	报告和日志 / 日志位置	INTEGER	0	0	511	设置日志文件的文件访问权限.	参数值期望使用数值模式来指定, 它的形式应该是系统调用chmod和umask可接受的.(为了使用习惯上以0开头的八进制格式数值)
+log_filename	sighup	报告和日志 / 日志位置	STRING	postgresql-%Y-%m-%d_%H%M%S.log			设置日志文件的文件名字模式.	
+log_hostname	sighup	报告和日志 / 日志内容	BOOLEAN	FALSE			在联接日志中记录主机名.	在缺省情况下,连接日志只显示每个正在连接主机的IP地址.如果想要显示主机名，那么必须把它打开，但是这取决于主机名解析的设置，这在性能上不会有影响.
+log_line_prefix	sighup	报告和日志 / 日志内容	STRING				将控制信息作为每条日志文本的前缀	如果是空的,那么不使用前缀
+log_lock_waits	superuser	报告和日志 / 日志内容	BOOLEAN	FALSE			对长时间的锁等待记日志	
+log_min_duration_statement	superuser	报告和日志 / 日志时间	INTEGER	0	-1	2147483647	设置最小执行时间，执行时间大于等于这个值的语句都将被记录.	如果值设置为0，那么打印出所有查询. 如果设置为-1，那么将把这个功能特性关闭
+log_min_error_statement	superuser	报告和日志 / 日志时间	ENUM	error			在此级别或以上级别, 所有语句产生的错误将被记录.	每一层都包含在这一层后面的层次, 对于越往后的层次，就会发送越少的消息.
+log_min_messages	superuser	报告和日志 / 日志时间	ENUM	warning			设置日志记录的信息级别.	每一层都包含在这一层后面的层次, 对于越往后的层次，就会发送越少的消息.
+log_parser_stats	superuser	统计信息 / 监控	BOOLEAN	FALSE			把分析器性能统计信息写入到服务器日志中.	
+log_planner_stats	superuser	统计信息 / 监控	BOOLEAN	FALSE			把规划器性能统计信息写入到服务器日志中.	
+log_rotation_age	sighup	报告和日志 / 日志位置	INTEGER	0	0	35791394	在N分钟后将会产生自动日志文件切换.	
+log_rotation_size	sighup	报告和日志 / 日志位置	INTEGER	0	0	2097151	当写入了N千字节会发生自动日志文件切换	
+log_statement	superuser	报告和日志 / 日志内容	ENUM	none			设置记录语句的类型.	
+log_statement_stats	superuser	统计信息 / 监控	BOOLEAN	FALSE			把 cumulative 性能统计信息写入到服务器日志中.	
+log_temp_files	superuser	报告和日志 / 日志内容	INTEGER	0	-1	2147483647	记录对超过这个数量(以千字节为单位)的临时文件的使用.	如果设置为0，打印所有查询. 默认值为 -1 (表示关闭此功能).
+log_timezone	sighup	报告和日志 / 日志内容	STRING	GMT			设置在日志消息中使用的时间区域	
+log_truncate_on_rotation	sighup	报告和日志 / 日志位置	BOOLEAN	FALSE			在日志切换期间截断相同名称的日志文件	
+logging_collector	postmaster	报告和日志 / 日志位置	BOOLEAN	FALSE			启动一个子进程用来捕获stderr输出或csvlogs,写到到日志文件中.	
+maintenance_work_mem	user	资源使用 / 内存	INTEGER	0	1024	2147483647	设置维护操作使用的最大内存数.	此处动作包括 VACUUM 和 CREATE INDEX.
+max_connections	postmaster	联接和认证 / 联接设置	INTEGER	0	1	8388607	设置并发联接的最大个数.	
+max_files_per_process	postmaster	资源使用 / 内核资源	INTEGER	0	25	2147483647	设置每一个服务器进程同时打开文件的最大个数.	
+max_locks_per_transaction	postmaster	锁管理	INTEGER	0	10	2147483647	设置每一个事物锁的最大个数.	持有共享锁表的大小是基于最多max_locks_per_transaction * max_connections个不同对象需要在任何时刻被锁定的假设来指定的.
+max_pred_locks_per_transaction	postmaster	锁管理	INTEGER	0	10	2147483647	设置每一个事物的断言锁的最大个数.	共享断言锁表的大小是基于最多max_locks_per_transaction * max_connections个不同对象需要在任何时刻被锁定的假设来指定的.
+max_prepared_transactions	postmaster	资源使用 / 内存	INTEGER	0	0	8388607	设置同步的已准备好事务的最大个数.	
+max_stack_depth	superuser	资源使用 / 内存	INTEGER	0	100	2147483647	设置最大的堆栈深度，单位是千字节.	
+max_standby_archive_delay	sighup	复制 / 备用服务器	INTEGER	0	-1	2147483647	当热备服务器在处理已归档的WAL数据时，在取消查询请求前设置最大的延迟.	
+max_standby_streaming_delay	sighup	复制 / 备用服务器	INTEGER	0	-1	2147483647	当热备服务器在处理通过流复制的WAL数据时，在取消查询请求前设置最大的延迟.	
+max_wal_senders	postmaster	复制/发送服务器	INTEGER	0	0	8388607	设置同时运行的WAL发送进程最大数量	
+password_encryption	user	联接和认证 / 安全和认证	BOOLEAN	FALSE			加密口令.	当在 CREATE USER 或者 ALTER USER 语句中指定的口令没有用 ENCRYPTED 或者 UNENCRYPTED, 此参数确定口令是否加密.
+port	postmaster	联接和认证 / 联接设置	INTEGER	0	1	65535	设置服务器监听的 TCP 端口号.	
+quote_all_identifiers	user	版本和平台兼容性 / 上一个 PostgreSQL 版本	BOOLEAN	FALSE			在生成SQL片段时，对所有标识符加引号括起来.	
+random_page_cost	user	查询调整 / Planner Cost Constants	REAL	0	0	1.79769e+308	设置计划器对非顺序获取磁盘页的开销估算.	
+restart_after_crash	sighup	错误处理	BOOLEAN	FALSE			后端服务器崩溃时重新初始化服务器.	
+search_path	user	客户端联接默认 / 语句动作	STRING	"$user",public			为不是模式限定的名称设置模式搜索顺序	
+seq_page_cost	user	查询调整 / Planner Cost Constants	REAL	0	0	1.79769e+308	设置计划器对顺序获取磁盘页的开销估算	
+session_replication_role	superuser	客户端联接默认 / 语句动作	ENUM	origin			为触发器和重写规则设置会话的行为	
+shared_buffers	postmaster	资源使用 / 内存	INTEGER	0	16	1073741823	设置服务器使用的共享内存缓冲区的数量.	
+shared_preload_libraries	postmaster	资源使用 / 内核资源	STRING				列出预装入服务器的共享库.	
+sql_inheritance	user	版本和平台兼容性 / 上一个 PostgreSQL 版本	BOOLEAN	FALSE			使子表在不同的命令中被缺省包含	
+ssl	postmaster	联接和认证 / 安全和认证	BOOLEAN	FALSE			启用 SSL 联接.	
+ssl_ca_file	postmaster	联接和认证 / 安全和认证	STRING				SSL证书授权文件的位置.	
+ssl_cert_file	postmaster	联接和认证 / 安全和认证	STRING	server.crt			SSL服务器证书文件的位置	
+ssl_ciphers	postmaster	联接和认证 / 安全和认证	STRING	DEFAULT:!LOW:!EXP:!MD5:@STRENGTH			设置日志信息的冗长.	
+ssl_crl_file	postmaster	联接和认证 / 安全和认证	STRING				SSL证书撤销列表文件的位置.	
+ssl_key_file	postmaster	联接和认证 / 安全和认证	STRING	server.key			SSL服务器私钥文件的位置.	
+ssl_renegotiation_limit	user	联接和认证 / 安全和认证	INTEGER	0	0	2147483647	在重新设定加密键之前设定需要进行发送和接收的流量总和	
+standard_conforming_strings	user	版本和平台兼容性 / 上一个 PostgreSQL 版本	BOOLEAN	FALSE			使字符串'...' 按照字面含义处理反斜线	
+statement_timeout	user	客户端联接默认 / 语句动作	INTEGER	0	0	2147483647	设置任何语句执行时间的最大值 (单位毫秒).	值为 0 的时候关闭超时.
+stats_temp_directory	sighup	统计信息 / 查询和索引统计收集器	STRING	pg_stat_tmp			将临时统计信息文件写到指定的目录	
+superuser_reserved_connections	postmaster	联接和认证 / 联接设置	INTEGER	0	0	8388607	设置为超级用户保留的联接数.	
+synchronize_seqscans	user	版本和平台兼容性 / 上一个 PostgreSQL 版本	BOOLEAN	FALSE			启用同步序列扫描	
+synchronous_commit	user	Write-Ahead 日志 / 设置	ENUM	on			设置当前事物的同步级别.	
+synchronous_standby_names	sighup	复制/主服务器	STRING				可能的同步备用节点的名称列表.	
+syslog_facility	sighup	报告和日志 / 日志位置	ENUM	local0			当启用系统日志 (syslog), 设置系统日志使用 "facility".	
+syslog_ident	sighup	报告和日志 / 日志位置	STRING	postgres			设置在系统日志 (syslog) 中确认 PostgreSQL 信息的程序名.	
+tcp_keepalives_count	user	客户端联接默认 / 其它默认	INTEGER	0	0	2147483647	设置每一个事物锁的最大个数.	用于控制连续存活器再次传输数量，这些存活器重在连接被认为断开前会丢失.值0用于表示系统缺省.
+tcp_keepalives_idle	user	客户端联接默认 / 其它默认	INTEGER	0	0	2147483647	启动TCP存活定时器的间隔	值为0的时候表示系统缺省值
+tcp_keepalives_interval	user	客户端联接默认 / 其它默认	INTEGER	0	0	2147483647	在两次TCP存活启动器重新传送之间需要花费的时间	值为0的时候表示系统缺省值
+temp_buffers	user	资源使用 / 内存	INTEGER	0	100	1073741823	设置每个会话可使用的临时缓冲区的最大数量.	
+temp_file_limit	superuser	资源使用/磁盘	INTEGER	0	-1	2147483647	为每个会话可使用的所有临时文件限制最大大小.	-1 意指没有限制.
+temp_tablespaces	user	客户端联接默认 / 语句动作	STRING				将表空间设置为用于存放临时表和排序文件	
+TimeZone	user	客户端联接默认 / 本地化和格式化	STRING	GMT			设置显示和解释时间戳的时区.	
+timezone_abbreviations	user	客户端联接默认 / 本地化和格式化	STRING				选择时间区域缩写的文件	
+trace_recovery_messages	sighup	开发人员选项	ENUM	log			启用日志功能，对与恢复操作相关的调试信息进行记录.	每一层都包含在这一层后面的层次, 对于越往后的层次，就会发送越少的消息.
+track_activities	superuser	统计信息 / 查询和索引统计收集器	BOOLEAN	FALSE			收集执行命令的统计信息.	在每个会话当前正在执行的命令上启用信息收集, 并带有命令开始执行的时间.
+track_activity_query_size	postmaster	资源使用 / 内存	INTEGER	0	100	102400	设置为pg_stat_activity.query所保留的空间大小，以字节为单位.	
+track_counts	superuser	统计信息 / 查询和索引统计收集器	BOOLEAN	FALSE			在数据库上正在执行的事务上收集统计信息.	
+track_functions	superuser	统计信息 / 查询和索引统计收集器	ENUM	none			在数据库运行的事务中收集函数级别统计信息.	
+track_io_timing	superuser	统计信息 / 查询和索引统计收集器	BOOLEAN	FALSE			为数据库I/O活动进行时间统计.	
+transform_null_equals	user	版本和平台兼容性 / 其它平台和客户端	BOOLEAN	FALSE			"expr=NULL" 看作为 "expr IS NULL".	当打开选项， expr = NULL (或 NULL = expr)形式的表达式会被当作expr IS NUL而进行处理, 那就是说，如果expr计算为空值那么会返回true,否则返回为false。表达式expr = NULL的正确行为应该是永远返回为空（未知)
+unix_socket_directories	postmaster	联接和认证 / 联接设置	STRING	/var/run/postgresql, /tmp			Sets the directories where Unix-domain sockets will be created.	
+unix_socket_group	postmaster	联接和认证 / 联接设置	STRING				设置 Unix-domain 套接字的属组.	套接字的属主用户也是起动服务的用户.
+unix_socket_permissions	postmaster	联接和认证 / 联接设置	INTEGER	0	0	511	设置 Unix-domain 套接字的访问权限.	Unix-domain 套接字使用普通的Unix文件许可集合.参数值应该是数值模式定义, 它的形式应该是系统调用chmod和umask可接受的.(为了使用习惯上以0开头的八进制格式数值)
+update_process_title	superuser	统计信息 / 查询和索引统计收集器	BOOLEAN	FALSE			更新进程标题来显示处于活动状态的SQL命令	每一次服务器开始运行新的SQL命令时启用进程标题的更新.
+vacuum_cost_delay	user	资源使用 / 基于开销的Vacuum延迟	INTEGER	0	0	100	Vacuum开销延迟是以毫秒为单位	
+vacuum_cost_limit	user	资源使用 / 基于开销的Vacuum延迟	INTEGER	0	1	10000	在暂停前可用的清理开销总量.	
+vacuum_cost_page_dirty	user	资源使用 / 基于开销的Vacuum延迟	INTEGER	0	0	10000	由vacuum进程对脏页进行清理的开销.	
+vacuum_cost_page_hit	user	资源使用 / 基于开销的Vacuum延迟	INTEGER	0	0	10000	在缓冲区缓存中找到对于一个页进行清理的开销.	
+vacuum_cost_page_miss	user	资源使用 / 基于开销的Vacuum延迟	INTEGER	0	0	10000	在缓冲区缓存中没有找到对于一个页进行清理的开销.	
+vacuum_defer_cleanup_age	sighup	复制/主服务器	INTEGER	0	0	1000000	VACUUM和热清理操作应该延迟的事务数量.	
+vacuum_freeze_min_age	user	客户端联接默认 / 语句动作	INTEGER	0	0	1000000000	VACUUM应该冻结一行记录的最小时间.	
+vacuum_freeze_table_age	user	客户端联接默认 / 语句动作	INTEGER	0	0	2000000000	这是VACUUM应该扫描整个表来冻结元组的时候.	
+vacuum_multixact_freeze_min_age	user	客户端联接默认 / 语句动作	INTEGER	0	0	1000000000	Minimum age at which VACUUM should freeze a MultiXactId in a table row.	
+vacuum_multixact_freeze_table_age	user	客户端联接默认 / 语句动作	INTEGER	0	0	2000000000	Multixact age at which VACUUM should scan whole table to freeze tuples.	
+wal_buffers	postmaster	Write-Ahead 日志 / 设置	INTEGER	0	-1	2147483647	为 WAL 设置共享内存中磁盘页缓冲区的个数.	
+wal_keep_segments	sighup	复制/发送服务器	INTEGER	0	0	2147483647	设置用于备用服务器而持有WAL文件的数量.	
+wal_level	postmaster	Write-Ahead 日志 / 设置	ENUM	minimal			设置写入WAL文件的信息的内容详细级别	
+wal_receiver_status_interval	sighup	复制 / 备用服务器	INTEGER	0	0	2147483	为WAL接受进程的状态报告(向主节点)设置最大时间间隔.	
+wal_receiver_timeout	sighup	复制 / 备用服务器	INTEGER	0	0	2147483647	Sets the maximum wait time to receive data from the primary.	
+wal_sender_timeout	sighup	复制/发送服务器	INTEGER	0	0	2147483647	设置最大时间，等待WAL复制.	
+wal_sync_method	sighup	Write-Ahead 日志 / 设置	ENUM	fdatasync			选择用于强制将WAL缓冲区的内容更新到磁盘的方法.	
+wal_writer_delay	sighup	Write-Ahead 日志 / 设置	INTEGER	0	1	10000	WAL写进程在两次刷新WAL缓存内容之间的睡眠时间	
+work_mem	user	资源使用 / 内存	INTEGER	0	64	2147483647	设置查询工作空间使用的最大内存数.	这些内存将可以由每一个内部排序操作和转换到临时磁盘文件之前的散列表来使用
+xmlbinary	user	客户端联接默认 / 语句动作	ENUM	base64			设置在XML中如何对二进制的值进行编码.	
+xmloption	user	客户端联接默认 / 语句动作	ENUM	content			设置在隐式分析和串行操作中的XML数据是否被当作文档或者内容片断.	
